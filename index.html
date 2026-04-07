@@ -1,0 +1,1344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Ifeoma — Content Producer</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&family=Jost:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --cream:#f5ede0;
+  --dark:#1e120a;
+  --brown:#2c1a0e;
+  --rust:#b85c38;
+  --muted-cream:rgba(245,237,224,0.55);
+  --muted-dark:rgba(30,18,10,0.45);
+}
+html{scroll-behavior:smooth;}
+body{font-family:'Jost',sans-serif;font-weight:300;background:var(--cream);color:var(--dark);overflow-x:hidden;}
+
+/* NAV */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:1.6rem 3rem;
+  background:transparent;
+}
+.logo{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1rem;letter-spacing:.25em;
+  text-transform:uppercase;font-weight:500;
+  color:var(--dark);text-decoration:none;
+}
+.nav-right{display:flex;gap:2.5rem;}
+.nav-right a{
+  font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--dark);text-decoration:none;opacity:.5;transition:opacity.2s;
+}
+.nav-right a:hover{opacity:1;}
+
+/* HERO */
+.hero{
+  background:var(--cream);
+  position:relative;overflow:hidden;
+  display:flex;flex-direction:column;
+  padding:0;
+}
+.hero-eyebrow{
+  font-size:.65rem;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--rust);margin-bottom:2rem;
+  opacity:0;animation:fadeUp .9s .3s forwards;
+}
+.hero-name{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(3.5rem,8vw,6.5rem);
+  font-weight:400;line-height:1;
+  color:var(--dark);margin-bottom:2rem;
+  opacity:0;animation:fadeUp .9s .5s forwards;
+}
+.hero-name em{font-style:italic;color:var(--rust);}
+.hero-sub{
+  font-size:.95rem;line-height:1.8;
+  color:rgba(30,18,10,.6);
+  max-width:460px;margin-bottom:3rem;
+  opacity:0;animation:fadeUp .9s .7s forwards;
+}
+.hero-btns{
+  display:flex;align-items:center;gap:2rem;flex-wrap:wrap;
+  opacity:0;animation:fadeUp .9s .9s forwards;
+}
+.hero-btn-primary{
+  padding:.9rem 2.2rem;
+  background:var(--dark);color:var(--cream);
+  font-family:'Jost',sans-serif;
+  font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;
+  border:none;text-decoration:none;display:inline-block;
+  transition:background .2s;
+}
+.hero-btn-primary:hover{background:#3a2415;}
+.hero-btn-text{
+  font-size:.65rem;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--dark);text-decoration:none;
+  border-bottom:1px solid rgba(30,18,10,.3);
+  padding-bottom:2px;transition:border-color .2s;
+}
+.hero-btn-text:hover{border-color:var(--dark);}
+
+/* hero dark stats strip */
+.hero-stats{
+  background:var(--dark);
+  display:grid;grid-template-columns:1fr 1fr;
+  position:relative;
+}
+.hero-stats-left{
+  padding:3rem;
+  display:flex;align-items:center;justify-content:center;
+  border-right:1px solid rgba(245,237,224,.08);
+}
+.hero-dot{
+  width:12px;height:12px;border-radius:50%;
+  border:1px solid var(--rust);background:var(--dark);
+}
+.hero-stats-right{
+  padding:3rem;
+  display:flex;flex-direction:column;gap:2rem;
+}
+.hero-stat{text-align:left;}
+.hero-stat-num{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(2rem,4vw,3rem);
+  font-weight:400;color:var(--cream);
+  letter-spacing:.02em;line-height:1;
+}
+.hero-stat-label{
+  font-size:.58rem;letter-spacing:.22em;text-transform:uppercase;
+  color:rgba(245,237,224,.3);margin-top:.3rem;
+}
+
+/* TICKER */
+.ticker-wrap{
+  background:var(--cream);
+  border-top:1px solid rgba(30,18,10,.12);
+  border-bottom:1px solid rgba(30,18,10,.12);
+  overflow:hidden;padding:.75rem 0;
+}
+.ticker-track{
+  display:flex;white-space:nowrap;
+  animation:ticker 18s linear infinite;
+}
+.ticker-item{
+  font-size:.65rem;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--dark);opacity:.5;
+  padding:0 1.5rem;
+}
+.ticker-dot{color:var(--rust);opacity:1;}
+@keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* SECTIONS */
+section{padding:6rem 3rem;}
+.label{
+  font-size:.65rem;letter-spacing:.25em;text-transform:uppercase;
+  color:var(--rust);margin-bottom:1.2rem;
+}
+
+/* ABOUT */
+.about{background:var(--cream);}
+.about-headline{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(2rem,4.5vw,3.2rem);
+  font-weight:400;line-height:1.2;
+  max-width:700px;margin-bottom:2.5rem;
+}
+.about-headline em{font-style:italic;color:var(--rust);}
+.about-tags{
+  display:flex;flex-wrap:wrap;gap:.6rem 2rem;
+  margin-bottom:3rem;padding-bottom:2.5rem;
+  border-bottom:1px solid rgba(30,18,10,.1);
+}
+.about-tag{
+  font-size:.65rem;letter-spacing:.22em;text-transform:uppercase;
+  color:rgba(30,18,10,.45);
+}
+.about-body{
+  display:grid;grid-template-columns:1fr 1fr;gap:3rem;
+}
+.about-body p{
+  font-size:.95rem;line-height:1.85;color:rgba(30,18,10,.7);
+}
+
+/* SERVICES */
+.services{background:var(--dark);padding:6rem 3rem;}
+.services-header{
+  display:grid;grid-template-columns:1fr 1fr;
+  align-items:flex-end;gap:2rem;
+  margin-bottom:4rem;
+}
+.services-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(2.5rem,5vw,4rem);
+  font-weight:400;color:var(--cream);line-height:1.1;
+}
+.services-title em{font-style:italic;color:var(--rust);}
+.services-subtitle{
+  font-size:.875rem;color:rgba(245,237,224,.4);
+  line-height:1.7;max-width:340px;
+}
+.services-list{display:flex;flex-direction:column;gap:0;}
+.service-item{
+  border-top:1px solid rgba(245,237,224,.1);
+  padding:2.5rem 0;
+  display:grid;grid-template-columns:auto 1fr;
+  gap:3rem;align-items:start;
+  transition:background .2s;
+  cursor:default;
+}
+.service-item:last-child{border-bottom:1px solid rgba(245,237,224,.1);}
+.service-num{
+  font-family:'Cormorant Garamond',serif;
+  font-size:.8rem;color:rgba(245,237,224,.25);
+  letter-spacing:.1em;padding-top:.25rem;
+  min-width:2rem;
+}
+.service-body{}
+.service-name{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.6rem;font-weight:400;
+  color:var(--cream);margin-bottom:.8rem;
+}
+.service-desc{
+  font-size:.875rem;line-height:1.8;
+  color:rgba(245,237,224,.4);max-width:600px;
+}
+
+/* PROCESS */
+.process{background:var(--cream);}
+.process-header{margin-bottom:3rem;}
+.process-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(2rem,4vw,3rem);
+  font-weight:400;line-height:1.2;margin-bottom:1.5rem;
+}
+.process-divider{
+  display:flex;align-items:center;gap:0;
+  margin-bottom:4rem;
+}
+.process-line{flex:1;height:1px;background:rgba(30,18,10,.12);}
+.process-dot{
+  width:10px;height:10px;border-radius:50%;
+  border:1px solid var(--rust);background:var(--cream);
+  margin:0 -1px;flex-shrink:0;
+}
+.process-grid{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:0;
+}
+.process-step{
+  padding:2.5rem 2.5rem 2.5rem 0;
+  border-bottom:1px solid rgba(30,18,10,.1);
+}
+.process-step:nth-child(even){padding-left:2.5rem;border-left:1px solid rgba(30,18,10,.1);}
+.process-step:nth-child(3),.process-step:nth-child(4){border-bottom:none;}
+.step-num{
+  font-family:'Cormorant Garamond',serif;
+  font-size:2.5rem;font-weight:300;
+  color:rgba(30,18,10,.1);line-height:1;
+  margin-bottom:1rem;
+}
+.step-name{
+  font-size:.65rem;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--dark);margin-bottom:1rem;
+}
+.step-desc{font-size:.875rem;line-height:1.8;color:rgba(30,18,10,.55);}
+
+/* QUOTE BLOCK */
+.quote-section{
+  padding:0 3rem;
+}
+.quote-card{
+  background:var(--brown);
+  padding:5rem 4rem;
+  text-align:center;
+  position:relative;
+}
+.quote-text{
+  font-family:'Cormorant Garamond',serif;
+  font-style:italic;font-weight:300;
+  font-size:clamp(1.3rem,2.5vw,1.9rem);
+  color:var(--cream);line-height:1.6;
+  max-width:600px;margin:0 auto 2rem;
+}
+.quote-author{
+  font-size:.65rem;letter-spacing:.25em;text-transform:uppercase;
+  color:rgba(245,237,224,.35);
+}
+.quote-dot{
+  width:10px;height:10px;border-radius:50%;
+  border:1px solid var(--rust);background:var(--brown);
+  margin:2rem auto 0;
+}
+
+/* WHO I WORK WITH */
+.who{background:var(--cream);padding:6rem 3rem;}
+.who-headline{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(2rem,4.5vw,3.2rem);
+  font-weight:400;line-height:1.2;
+  max-width:700px;margin-bottom:1.5rem;
+}
+.who-headline em{font-style:italic;color:var(--rust);}
+.who-body{
+  font-size:.9rem;line-height:1.85;color:rgba(30,18,10,.6);
+  max-width:700px;margin-bottom:3rem;
+}
+.who-list{display:flex;flex-direction:column;gap:0;}
+.who-item{
+  font-size:.9rem;line-height:1.7;color:rgba(30,18,10,.65);
+  padding:1.2rem 0 1.2rem 1.4rem;
+  border-bottom:1px solid rgba(30,18,10,.07);
+  position:relative;
+}
+.who-item:last-child{border-bottom:none;}
+.who-item::before{
+  content:'';
+  position:absolute;left:0;top:1.55rem;
+  width:5px;height:5px;border-radius:50%;
+  background:var(--rust);opacity:.6;
+}
+
+/* CTA */
+.cta-section{
+  background:var(--cream);
+  padding:6rem 3rem;text-align:center;
+  position:relative;overflow:hidden;
+}
+.cta-bg-text{
+  position:absolute;left:50%;top:50%;
+  transform:translate(-50%,-50%);
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(5rem,15vw,14rem);
+  font-weight:300;letter-spacing:.15em;
+  color:rgba(30,18,10,.04);
+  pointer-events:none;white-space:nowrap;
+}
+.cta-inner{position:relative;z-index:2;}
+.cta-label{
+  font-size:.65rem;letter-spacing:.28em;text-transform:uppercase;
+  color:rgba(30,18,10,.35);margin-bottom:1.5rem;
+}
+.cta-headline{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(2.5rem,5vw,4rem);
+  font-weight:400;line-height:1.15;
+  margin-bottom:1.5rem;
+}
+.cta-headline em{font-style:italic;color:var(--rust);}
+.cta-body{
+  font-size:.9rem;line-height:1.8;
+  color:rgba(30,18,10,.55);
+  max-width:500px;margin:0 auto 3rem;
+}
+.cta-buttons{display:flex;justify-content:center;gap:1rem;flex-wrap:wrap;}
+.btn-primary{
+  padding:.9rem 2.2rem;
+  background:var(--dark);color:var(--cream);
+  font-family:'Jost',sans-serif;
+  font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;
+  border:none;cursor:pointer;
+  text-decoration:none;display:inline-block;
+  transition:background .2s;
+}
+.btn-primary:hover{background:#3a2415;}
+.btn-outline{
+  padding:.9rem 2.2rem;
+  background:transparent;color:var(--dark);
+  font-family:'Jost',sans-serif;
+  font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;
+  border:1px solid rgba(30,18,10,.3);cursor:pointer;
+  text-decoration:none;display:inline-block;
+  transition:border-color .2s,color .2s;
+}
+.btn-outline:hover{border-color:var(--dark);}
+
+/* FOOTER */
+footer{
+  padding:2rem 3rem;
+  border-top:1px solid rgba(30,18,10,.1);
+  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;
+}
+footer p{font-size:.7rem;letter-spacing:.1em;color:rgba(30,18,10,.3);}
+.footer-links{display:flex;gap:2rem;}
+.footer-links a{
+  font-size:.65rem;letter-spacing:.18em;text-transform:uppercase;
+  color:rgba(30,18,10,.3);text-decoration:none;transition:color .2s;
+}
+.footer-links a:hover{color:var(--rust);}
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .8s ease,transform .8s ease;}
+.reveal.visible{opacity:1;transform:none;}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+
+/* HERO IMAGE PLACEHOLDER */
+.hero-layout{
+  display:grid;grid-template-columns:1fr 1fr;
+  align-items:stretch;min-height:100vh;
+}
+.hero-left{
+  display:flex;flex-direction:column;justify-content:center;
+  padding:9rem 3rem 4rem;
+}
+.hero-image-col{
+  position:relative;overflow:hidden;
+  background:var(--dark);
+  display:flex;align-items:center;justify-content:center;
+}
+.hero-img-placeholder{
+  width:100%;height:100%;
+  min-height:520px;
+  position:relative;
+  display:flex;align-items:center;justify-content:center;
+  background:linear-gradient(160deg,#2c1a0e 0%,#1e120a 60%,#150d07 100%);
+  overflow:hidden;
+}
+/* full-bleed photo when added */
+.hero-img-placeholder img{
+  width:100%;height:100%;
+  object-fit:cover;position:absolute;inset:0;display:block;
+}
+/* large italic bg letter */
+.hero-img-placeholder::before{
+  content:'I';
+  position:absolute;
+  font-family:'Cormorant Garamond',serif;
+  font-style:italic;font-weight:300;
+  font-size:clamp(14rem,22vw,22rem);
+  color:rgba(245,237,224,.03);
+  line-height:1;letter-spacing:-.02em;
+  top:50%;left:50%;
+  transform:translate(-40%,-50%);
+  pointer-events:none;user-select:none;
+}
+/* 4-corner bracket marks */
+.hero-img-placeholder-corners{
+  position:absolute;inset:2rem;pointer-events:none;
+}
+.hero-img-placeholder-corners::before,
+.hero-img-placeholder-corners::after{
+  content:'';position:absolute;
+  width:22px;height:22px;
+}
+.hero-img-placeholder-corners::before{
+  top:0;left:0;
+  border-top:1px solid rgba(184,92,56,.4);
+  border-left:1px solid rgba(184,92,56,.4);
+}
+.hero-img-placeholder-corners::after{
+  bottom:0;right:0;
+  border-bottom:1px solid rgba(184,92,56,.4);
+  border-right:1px solid rgba(184,92,56,.4);
+}
+.hero-img-placeholder-corners2{
+  position:absolute;inset:2rem;pointer-events:none;
+}
+.hero-img-placeholder-corners2::before,
+.hero-img-placeholder-corners2::after{
+  content:'';position:absolute;
+  width:22px;height:22px;
+}
+.hero-img-placeholder-corners2::before{
+  top:0;right:0;
+  border-top:1px solid rgba(184,92,56,.4);
+  border-right:1px solid rgba(184,92,56,.4);
+}
+.hero-img-placeholder-corners2::after{
+  bottom:0;left:0;
+  border-bottom:1px solid rgba(184,92,56,.4);
+  border-left:1px solid rgba(184,92,56,.4);
+}
+/* center content */
+.hero-img-placeholder-inner{
+  position:relative;z-index:2;
+  display:flex;flex-direction:column;align-items:center;gap:1.4rem;
+  text-align:center;
+}
+.hero-img-viewfinder{
+  width:64px;height:64px;
+  border:1px solid rgba(245,237,224,.15);
+  position:relative;
+  display:flex;align-items:center;justify-content:center;
+}
+.hero-img-viewfinder::before,
+.hero-img-viewfinder::after{
+  content:'';position:absolute;
+  width:8px;height:8px;
+}
+.hero-img-viewfinder::before{top:-1px;left:-1px;border-top:2px solid var(--rust);border-left:2px solid var(--rust);}
+.hero-img-viewfinder::after{bottom:-1px;right:-1px;border-bottom:2px solid var(--rust);border-right:2px solid var(--rust);}
+.hero-img-viewfinder svg{
+  width:20px;height:20px;
+  stroke:rgba(245,237,224,.3);fill:none;stroke-width:1;
+}
+.hero-img-name{
+  font-family:'Cormorant Garamond',serif;
+  font-style:italic;font-weight:300;
+  font-size:1.4rem;color:rgba(245,237,224,.35);
+  letter-spacing:.04em;
+}
+.hero-img-label{
+  font-size:.52rem;letter-spacing:.28em;text-transform:uppercase;
+  color:rgba(245,237,224,.18);
+}
+/* bottom meta line */
+.hero-img-meta{
+  position:absolute;bottom:0;left:0;right:0;
+  padding:1.2rem 2rem;
+  display:flex;align-items:center;justify-content:space-between;
+  border-top:1px solid rgba(245,237,224,.05);
+  z-index:2;
+}
+.hero-img-meta-left{
+  font-size:.52rem;letter-spacing:.2em;text-transform:uppercase;
+  color:rgba(245,237,224,.18);
+}
+.hero-img-meta-dot{
+  width:4px;height:4px;border-radius:50%;
+  background:rgba(184,92,56,.5);
+}
+.hero-img-tag{
+  font-size:.52rem;letter-spacing:.2em;text-transform:uppercase;
+  color:rgba(245,237,224,.18);
+}
+
+/* SHOWCASE */
+.showcase{
+  background:var(--dark);
+  padding:6rem 3rem;
+}
+.showcase-header{
+  display:grid;grid-template-columns:1fr 1fr;
+  align-items:flex-end;gap:2rem;
+  margin-bottom:2.5rem;
+}
+.showcase-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(2.5rem,5vw,4rem);
+  font-weight:400;color:var(--cream);line-height:1.1;
+}
+.showcase-title em{font-style:italic;color:var(--rust);}
+.showcase-desc{
+  font-size:.875rem;color:rgba(245,237,224,.4);
+  line-height:1.7;max-width:340px;
+}
+
+/* FILTER TABS */
+.sc-filters{
+  display:flex;align-items:center;gap:0;
+  margin-bottom:2rem;
+  border-bottom:1px solid rgba(245,237,224,.08);
+}
+.sc-filter-btn{
+  font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;
+  color:rgba(245,237,224,.3);
+  background:none;border:none;cursor:pointer;
+  padding:.75rem 1.4rem;
+  border-bottom:2px solid transparent;
+  margin-bottom:-1px;
+  transition:color .2s,border-color .2s;
+  font-family:'Jost',sans-serif;
+}
+.sc-filter-btn:hover{color:rgba(245,237,224,.7);}
+.sc-filter-btn.active{
+  color:var(--cream);
+  border-bottom-color:var(--rust);
+}
+
+/* GRID */
+.sc-cat-desc{
+  padding:1.4rem 0 2rem;
+}
+.sc-cat-desc-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.2rem;font-weight:400;
+  color:var(--cream);margin-bottom:.4rem;letter-spacing:.01em;
+}
+.sc-cat-desc-text{
+  font-size:.8rem;line-height:1.75;
+  color:rgba(245,237,224,.35);
+  max-width:520px;
+}
+
+.showcase-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:.6rem;
+}
+.sc-card{
+  position:relative;overflow:hidden;
+  background:rgba(245,237,224,.04);
+  cursor:pointer;
+}
+.sc-card-media{
+  width:100%;
+  padding-top:177.78%; /* 9:16 portrait — reel aesthetic */
+  position:relative;overflow:hidden;
+}
+.sc-card-media-inner{
+  position:absolute;inset:0;
+  display:flex;align-items:center;justify-content:center;
+}
+.sc-card-media-inner img,
+.sc-card-media-inner video{
+  position:absolute;inset:0;
+  width:100%;height:100%;object-fit:cover;display:block;
+  transition:transform .65s ease;
+}
+.sc-card:hover .sc-card-media-inner img,
+.sc-card:hover .sc-card-media-inner video{transform:scale(1.05);}
+
+/* placeholder */
+.sc-placeholder{
+  position:absolute;inset:0;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:.7rem;
+}
+.sc-placeholder-line{
+  width:30px;height:1px;background:rgba(245,237,224,.1);
+}
+.sc-play{
+  width:38px;height:38px;border-radius:50%;
+  border:1px solid rgba(245,237,224,.18);
+  display:flex;align-items:center;justify-content:center;
+  transition:border-color .25s,background .25s;
+}
+.sc-card:hover .sc-play{
+  border-color:var(--rust);background:rgba(184,92,56,.15);
+}
+.sc-play svg{
+  width:11px;height:11px;
+  fill:rgba(245,237,224,.4);
+  margin-left:2px;
+  transition:fill .25s;
+}
+.sc-card:hover .sc-play svg{fill:var(--rust);}
+
+/* hover overlay */
+.sc-card-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(20,10,4,.9) 0%,rgba(20,10,4,.2) 50%,transparent 70%);
+  opacity:0;transition:opacity .3s;
+  pointer-events:none;
+  display:flex;flex-direction:column;justify-content:flex-end;
+  padding:1rem;
+}
+.sc-card:hover .sc-card-overlay{opacity:1;}
+.sc-card-tag{
+  font-size:.5rem;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--rust);margin-bottom:.35rem;
+}
+.sc-card-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:.95rem;font-weight:400;
+  color:var(--cream);line-height:1.3;
+}
+
+/* top-right corner mark */
+.sc-card::before{
+  content:'';position:absolute;
+  top:.6rem;right:.6rem;
+  width:14px;height:14px;
+  border-top:1px solid rgba(245,237,224,.1);
+  border-right:1px solid rgba(245,237,224,.1);
+  z-index:2;pointer-events:none;
+  transition:border-color .25s;
+}
+.sc-card:hover::before{border-color:rgba(184,92,56,.4);}
+
+/* index number */
+.sc-index{
+  position:absolute;bottom:.7rem;left:.8rem;
+  font-family:'Cormorant Garamond',serif;
+  font-size:.65rem;color:rgba(245,237,224,.15);
+  letter-spacing:.06em;z-index:2;
+  transition:opacity .25s;
+}
+.sc-card:hover .sc-index{opacity:0;}
+
+/* hidden via filter */
+.sc-card.hidden{display:none;}
+
+/* showcase footer row */
+.showcase-footer{
+  margin-top:2rem;
+  display:flex;align-items:center;justify-content:space-between;
+  border-top:1px solid rgba(245,237,224,.07);
+  padding-top:1.6rem;
+}
+.showcase-note{
+  font-size:.7rem;color:rgba(245,237,224,.2);
+  letter-spacing:.08em;
+}
+.showcase-cta{
+  font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--cream);text-decoration:none;
+  border-bottom:1px solid rgba(245,237,224,.2);
+  padding-bottom:2px;
+  transition:border-color .2s,color .2s;
+}
+.showcase-cta:hover{color:var(--rust);border-color:var(--rust);}
+
+/* VIDEO MODAL */
+.vmodal{
+  position:fixed;inset:0;z-index:200;
+  display:flex;align-items:center;justify-content:center;
+  opacity:0;pointer-events:none;
+  transition:opacity .25s;
+}
+.vmodal.open{opacity:1;pointer-events:all;}
+.vmodal-backdrop{
+  position:absolute;inset:0;
+  background:rgba(14,8,3,.93);
+  cursor:pointer;
+}
+.vmodal-player{
+  position:relative;z-index:1;
+  width:min(360px,88vw);
+  animation:fadeUp .25s both;
+}
+.vmodal-close{
+  position:absolute;top:-2.6rem;right:0;
+  background:none;border:none;cursor:pointer;
+  color:rgba(245,237,224,.45);
+  font-family:'Jost',sans-serif;
+  font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;
+  display:flex;align-items:center;gap:.5rem;
+  transition:color .2s;padding:0;
+}
+.vmodal-close:hover{color:var(--cream);}
+.vmodal-close-x{
+  width:22px;height:22px;position:relative;display:inline-flex;
+  align-items:center;justify-content:center;
+  border:1px solid rgba(245,237,224,.2);
+  border-radius:50%;font-size:.8rem;line-height:1;
+  transition:border-color .2s;
+}
+.vmodal-close:hover .vmodal-close-x{border-color:rgba(245,237,224,.5);}
+.vmodal-wrap{
+  position:relative;width:100%;padding-top:177.78%;
+  background:var(--dark);overflow:hidden;
+}
+.vmodal-wrap video{
+  position:absolute;inset:0;
+  width:100%;height:100%;object-fit:cover;display:block;
+}
+.vmodal-corners{position:absolute;inset:0;pointer-events:none;z-index:2;}
+.vmodal-corners::before,.vmodal-corners::after{
+  content:'';position:absolute;width:18px;height:18px;
+}
+.vmodal-corners::before{top:0;left:0;border-top:1px solid rgba(184,92,56,.5);border-left:1px solid rgba(184,92,56,.5);}
+.vmodal-corners::after{bottom:0;right:0;border-bottom:1px solid rgba(184,92,56,.5);border-right:1px solid rgba(184,92,56,.5);}
+.vmodal-info{
+  display:flex;align-items:baseline;gap:1rem;
+  padding:.9rem 0 0;
+}
+.vmodal-tag{
+  font-size:.5rem;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--rust);white-space:nowrap;
+}
+.vmodal-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1rem;font-weight:400;
+  color:rgba(245,237,224,.7);
+}
+/* sc-card cursor */
+.sc-card{cursor:pointer;}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+  nav{padding:1.2rem 1.5rem;}
+  .nav-right{display:none;}
+  .hero,.services,section,.who,.quote-section,.cta-section{padding:5rem 1.5rem 4rem;}
+  .hero-layout{grid-template-columns:1fr;}
+  .hero-image-col{display:none;}
+  .hero-left{padding:9rem 1.5rem 4rem;}
+  .about-body{grid-template-columns:1fr;}
+  .services-header{grid-template-columns:1fr;}
+  .process-grid{grid-template-columns:1fr;}
+  .process-step:nth-child(even){padding-left:0;border-left:none;}
+  .process-step:nth-child(3){border-bottom:1px solid rgba(30,18,10,.1);}
+  .quote-card{padding:3rem 1.5rem;}
+  footer{flex-direction:column;}
+  .showcase{padding:5rem 1.5rem 4rem;}
+  .showcase-header{grid-template-columns:1fr;}
+  .showcase-grid{grid-template-columns:repeat(2,1fr);gap:.5rem;}
+  .sc-cat-desc-title{font-size:1rem;}
+  .sc-filters{flex-wrap:wrap;gap:.3rem;}
+  .sc-filter-btn{padding:.6rem .9rem;}
+  .showcase-footer{flex-direction:column;gap:1rem;align-items:flex-start;}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="logo" href="#">Ifeoma</a>
+  <div class="nav-right">
+    <a href="#about">About</a>
+    <a href="#services">Services</a>
+    <a href="#showcase">Work</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-layout">
+
+    <!-- LEFT: TEXT -->
+    <div class="hero-left">
+      <div class="hero-eyebrow">Content Producer · Creative Partner · Nigeria</div>
+      <h1 class="hero-name">Ife<em>oma</em></h1>
+      <p class="hero-sub">I make personal brands in fashion, beauty and lifestyle look and sound exactly as premium as their vision deserves — without adding more to their plate.</p>
+      <div class="hero-btns">
+        <a href="#contact" class="hero-btn-primary">Work With Me</a>
+        <a href="#services" class="hero-btn-text">See What I Do</a>
+      </div>
+    </div>
+
+    <!-- RIGHT: IMAGE -->
+    <div class="hero-image-col">
+      <div class="hero-img-placeholder">
+        <img src="/images/Hero-img.jpg" alt="Ifeoma — Content Producer">
+        <div class="hero-img-placeholder-corners"></div>
+        <div class="hero-img-placeholder-corners2"></div>
+        <div class="hero-img-placeholder-inner">
+          <div class="hero-img-viewfinder">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="12" cy="9" r="3.2"/>
+              <path d="M5 20c0-3.8 3.1-6.5 7-6.5s7 2.7 7 6.5"/>
+            </svg>
+          </div>
+          <div class="hero-img-name">Ifeoma</div>
+          
+        </div>
+        <div class="hero-img-meta">
+          <span class="hero-img-meta-left">Content Producer</span>
+          <span class="hero-img-meta-dot"></span>
+          <span class="hero-img-tag">Nigeria</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- STATS strip below the two columns -->
+  <div class="hero-stats">
+    <div class="hero-stats-left">
+      <div class="hero-dot"></div>
+    </div>
+    <div class="hero-stats-right">
+      <div class="hero-stat">
+        <div class="hero-stat-num">3+</div>
+        <div class="hero-stat-label">Years Producing</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">50+</div>
+        <div class="hero-stat-label">Brands Served</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker-wrap">
+  <div class="ticker-track">
+    <span class="ticker-item">Video Editing</span>
+    <span class="ticker-item ticker-dot">•</span>
+    <span class="ticker-item">Content Strategy</span>
+    <span class="ticker-item ticker-dot">•</span>
+    <span class="ticker-item">Script Writing</span>
+    <span class="ticker-item ticker-dot">•</span>
+    <span class="ticker-item">Post Production</span>
+    <span class="ticker-item ticker-dot">•</span>
+    <span class="ticker-item">Creative Direction</span>
+    <span class="ticker-item ticker-dot">•</span>
+    <span class="ticker-item">Content Planning</span>
+    <span class="ticker-item ticker-dot">•</span>
+    <span class="ticker-item">Video Editing</span>
+    <span class="ticker-item ticker-dot">•</span>
+    <span class="ticker-item">Content Strategy</span>
+    <span class="ticker-item ticker-dot">•</span>
+    <span class="ticker-item">Script Writing</span>
+    <span class="ticker-item ticker-dot">•</span>
+    <span class="ticker-item">Post Production</span>
+    <span class="ticker-item ticker-dot">•</span>
+    <span class="ticker-item">Creative Direction</span>
+    <span class="ticker-item ticker-dot">•</span>
+    <span class="ticker-item">Content Planning</span>
+    <span class="ticker-item ticker-dot">•</span>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section class="about reveal" id="about">
+  <div class="label">Who I Am</div>
+  <h1 class="about-headline">Behind every great creator is a <em>great producer.</em></h1>
+  <div class="about-tags">
+    <span class="about-tag">Fashion</span>
+    <span class="about-tag">Beauty</span>
+    <span class="about-tag">Lifestyle</span>
+    <span class="about-tag">Tech</span>
+    <span class="about-tag">Real Estate</span>
+    <span class="about-tag">NGO</span>
+  </div>
+  <div class="about-body">
+    <p>I'm Ifeoma — a Nigerian content producer who works exclusively with personal brands in fashion, beauty and lifestyle. I handle the full creative pipeline: the ideas, the scripts, the edits, the graphics, the planning. Everything that makes your content feel intentional and premium.</p>
+    <p>I've worked across tech, real estate, justice-focused nonprofits, and personal brands — which means I understand how to adapt creative thinking to different worlds. But fashion, beauty and lifestyle is where I come alive. It's where storytelling meets aesthetics, and that's exactly my language.</p>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services reveal" id="services">
+  <div class="services-header">
+    <div>
+      <div class="label" style="color:rgba(245,237,224,.35);">What I Bring</div>
+      <h2 class="services-title">What I <em>bring</em><br>to the table</h2>
+    </div>
+    <p class="services-subtitle">Every service is built to give you back your time while making your content undeniable.</p>
+  </div>
+  <div class="services-list">
+    <div class="service-item">
+      <div class="service-num">01</div>
+      <div class="service-body">
+        <div class="service-name">Video Editing & Post Production</div>
+        <div class="service-desc">Reels, YouTube content, short-form, long-form — edited with intentionality. Colour grading, transitions, pacing, music sync. Your footage transformed into content that earns its place on a feed.</div>
+      </div>
+    </div>
+    <div class="service-item">
+      <div class="service-num">02</div>
+      <div class="service-body">
+        <div class="service-name">Script Writing & Voiceover</div>
+        <div class="service-desc">Words written in your voice, not mine. Scripts that feel natural when you deliver them, voiceovers that hold attention from the first second to the last. Storytelling as a strategy.</div>
+      </div>
+    </div>
+    <div class="service-item">
+      <div class="service-num">03</div>
+      <div class="service-body">
+        <div class="service-name">Content Strategy & Planning</div>
+        <div class="service-desc">Monthly content calendars built around your goals, your audience, and what actually works in your niche. You'll never stare at a blank page wondering what to post again.</div>
+      </div>
+    </div>
+    <div class="service-item">
+      <div class="service-num">04</div>
+      <div class="service-body">
+        <div class="service-name">Graphics & Visual Design</div>
+        <div class="service-desc">Thumbnails, carousels, story templates, brand graphics — all designed to feel cohesive with your aesthetic and elevate every piece of content you put out.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="process reveal" id="process">
+  <div class="process-header">
+    <div class="label">How It Works</div>
+    <h2 class="process-title">Simple. Collaborative.<br>No stress on your end.</h2>
+  </div>
+  <div class="process-divider">
+    <div class="process-line"></div>
+    <div class="process-dot"></div>
+    <div class="process-line"></div>
+  </div>
+  <div class="process-grid">
+    <div class="process-step">
+      <div class="step-num">01</div>
+      <div class="step-name">We Talk</div>
+      <p class="step-desc">A quick 15-minute call or DM conversation where I learn your brand, your goals, your aesthetic, and what's not working right now. No lengthy forms.</p>
+    </div>
+    <div class="process-step">
+      <div class="step-num">02</div>
+      <div class="step-name">I Plan</div>
+      <p class="step-desc">I build out a content plan tailored to your world — ideas, scripts, a calendar. You review, we adjust. You're in control the whole time.</p>
+    </div>
+    <div class="process-step">
+      <div class="step-num">03</div>
+      <div class="step-name">I Produce</div>
+      <p class="step-desc">Editing, design, voiceovers — all the production happens on my end. You get polished, ready-to-post content delivered on time, every time.</p>
+    </div>
+    <div class="process-step">
+      <div class="step-num">04</div>
+      <div class="step-name">You Show Up</div>
+      <p class="step-desc">You post. Your audience sees the best version of your brand. We review what performed and refine for next month. It gets better every cycle.</p>
+    </div>
+  </div>
+</section>
+
+<!-- QUOTE -->
+<div class="quote-section reveal">
+  <div class="quote-card">
+    <p class="quote-text">"I don't want to manage your growth. I want to make sure every piece of content you put out looks like it belongs at the top."</p>
+    <div class="quote-author">— Ifeoma, Content Producer</div>
+    <div class="quote-dot"></div>
+  </div>
+</div>
+
+<!-- SHOWCASE -->
+<section class="showcase reveal" id="showcase">
+
+  <div class="showcase-header">
+    <div>
+      <div class="label" style="color:rgba(245,237,224,.35);">Selected Work</div>
+      <h2 class="showcase-title">Where the <em>work</em><br>speaks for itself</h2>
+    </div>
+    <p class="showcase-desc">21 pieces spanning fashion, beauty, lifestyle and brand campaigns. Filter by category to explore each world.</p>
+  </div>
+
+  <!-- FILTER TABS -->
+  <div class="sc-filters">
+    <button class="sc-filter-btn active" data-filter="lifestyle">Lifestyle & Vlog</button>
+    <button class="sc-filter-btn" data-filter="beauty">Beauty</button>
+    <button class="sc-filter-btn" data-filter="fashion">Fashion & Style</button>
+    <button class="sc-filter-btn" data-filter="brand">Brand & Corporate</button>
+    <button class="sc-filter-btn" data-filter="bts">Behind the Scenes</button>
+  </div>
+
+  <!-- CATEGORY DESCRIPTION -->
+  <div class="sc-cat-desc" id="sc-cat-desc">
+    <div class="sc-cat-desc-title" id="sc-cat-desc-title">Lifestyle & Vlog Production</div>
+    <p class="sc-cat-desc-text" id="sc-cat-desc-text">Real moments, thoughtfully edited. GRWMs, hotel content, makeup shopping vlogs, voiceover-led storytelling.</p>
+  </div>
+
+  <!-- GRID — 21 videos across 5 categories -->
+  <div class="showcase-grid">
+
+    <!-- ── LIFESTYLE (4) ── -->
+    <div class="sc-card" data-cat="lifestyle">
+      <span class="sc-index">01</span>
+      <div class="sc-card-media"><div class="sc-card-media-inner">
+        <video src="https://res.cloudinary.com/dwmuyr8ur/video/upload/ifeoma/lifestyle-01.mov" muted playsinline preload="metadata" loop></video>
+      </div></div>
+      <div class="sc-card-overlay"><div class="sc-card-tag">Lifestyle & Vlog</div><div class="sc-card-title">GRWM Vlog</div></div>
+    </div>
+
+    <div class="sc-card" data-cat="lifestyle">
+      <span class="sc-index">02</span>
+      <div class="sc-card-media"><div class="sc-card-media-inner">
+        <video src="https://res.cloudinary.com/dwmuyr8ur/video/upload/ifeoma/lifestyle-02.mov" muted playsinline preload="metadata" loop></video>
+      </div></div>
+      <div class="sc-card-overlay"><div class="sc-card-tag">Lifestyle & Vlog</div><div class="sc-card-title">Hotel Content</div></div>
+    </div>
+
+    <div class="sc-card" data-cat="lifestyle">
+      <span class="sc-index">03</span>
+      <div class="sc-card-media"><div class="sc-card-media-inner">
+        <video src="https://res.cloudinary.com/dwmuyr8ur/video/upload/ifeoma/lifestyle-03.mov" muted playsinline preload="metadata" loop></video>
+      </div></div>
+      <div class="sc-card-overlay"><div class="sc-card-tag">Lifestyle & Vlog</div><div class="sc-card-title">Makeup Shopping Vlog</div></div>
+    </div>
+
+    <div class="sc-card" data-cat="lifestyle">
+      <span class="sc-index">04</span>
+      <div class="sc-card-media"><div class="sc-card-media-inner">
+        <video src="https://res.cloudinary.com/dwmuyr8ur/video/upload/ifeoma/lifestyle-04.mov" muted playsinline preload="metadata" loop></video>
+      </div></div>
+      <div class="sc-card-overlay"><div class="sc-card-tag">Lifestyle & Vlog</div><div class="sc-card-title">Day in My Life</div></div>
+    </div>
+
+    <!-- ── BEAUTY (7) ── -->
+    <div class="sc-card hidden" data-cat="beauty">
+      <span class="sc-index">01</span>
+      <div class="sc-card-media"><div class="sc-card-media-inner">
+        <video src="https://res.cloudinary.com/dwmuyr8ur/video/upload/ifeoma/beauty-01.mov" muted playsinline preload="metadata" loop></video>
+      </div></div>
+      <div class="sc-card-overlay"><div class="sc-card-tag">Beauty Content</div><div class="sc-card-title">Full Glam Tutorial</div></div>
+    </div>
+
+    <div class="sc-card hidden" data-cat="beauty">
+      <span class="sc-index">02</span>
+      <div class="sc-card-media"><div class="sc-card-media-inner">
+        <video src="https://res.cloudinary.com/dwmuyr8ur/video/upload/ifeoma/beauty-02.mov" muted playsinline preload="metadata" loop></video>
+      </div></div>
+      <div class="sc-card-overlay"><div class="sc-card-tag">Beauty Content</div><div class="sc-card-title">Skincare Routine</div></div>
+    </div>
+
+    <div class="sc-card hidden" data-cat="beauty">
+      <span class="sc-index">03</span>
+      <div class="sc-card-media"><div class="sc-card-media-inner">
+        <video src="https://res.cloudinary.com/dwmuyr8ur/video/upload/ifeoma/beauty-03.mov" muted playsinline preload="metadata" loop></video>
+      </div></div>
+      <div class="sc-card-overlay"><div class="sc-card-tag">Beauty Content</div><div class="sc-card-title">Makeup Transformation</div></div>
+    </div>
+
+    <div class="sc-card hidden" data-cat="beauty">
+      <span class="sc-index">04</span>
+      <div class="sc-card-media"><div class="sc-card-media-inner">
+        <video src="https://res.cloudinary.com/dwmuyr8ur/video/upload/ifeoma/beauty-04.mov" muted playsinline preload="metadata" loop></video>
+      </div></div>
+      <div class="sc-card-overlay"><div class="sc-card-tag">Beauty Content</div><div class="sc-card-title">Natural Glam Look</div></div>
+    </div>
+
+    <div class="sc-card hidden" data-cat="beauty">
+      <span class="sc-index">05</span>
+      <div class="sc-card-media"><div class="sc-card-media-inner">
+        <video src="https://res.cloudinary.com/dwmuyr8ur/video/upload/ifeoma/beauty-05.mov" muted playsinline preload="metadata" loop></video>
+      </div></div>
+      <div class="sc-card-overlay"><div class="sc-card-tag">Beauty Content</div><div class="sc-card-title">Body Glow Routine</div></div>
+    </div>
+
+    <div class="sc-card hidden" data-cat="beauty">
+      <span class="sc-index">06</span>
+      <div class="sc-card-media"><div class="sc-card-media-inner">
+        <video src="https://res.cloudinary.com/dwmuyr8ur/video/upload/ifeoma/beauty-06.mov" muted playsinline preload="metadata" loop></video>
+      </div></div>
+      <div class="sc-card-overlay"><div class="sc-card-tag">Beauty Content</div><div class="sc-card-title">Talking Head Edit</div></div>
+    </div>
+
+    <div class="sc-card hidden" data-cat="beauty">
+      <span class="sc-index">07</span>
+      <div class="sc-card-media"><div class="sc-card-media-inner">
+        <video src="https://res.cloudinary.com/dwmuyr8ur/video/upload/ifeoma/beauty-07.mov" muted playsinline preload="metadata" loop></video>
+      </div></div>
+      <div class="sc-card-overlay"><div class="sc-card-tag">Beauty Content</div><div class="sc-card-title">Get Ready With Me</div></div>
+    </div>
+
+    <!-- ── FASHION & STYLE (3) ── -->
+    <div class="sc-card hidden" data-cat="fashion">
+      <span class="sc-index">01</span>
+      <div class="sc-card-media"><div class="sc-card-media-inner">
+        <video src="https://res.cloudinary.com/dwmuyr8ur/video/upload/ifeoma/fashion-01.mov" muted playsinline preload="metadata" loop></video>
+      </div></div>
+      <div class="sc-card-overlay"><div class="sc-card-tag">Fashion & Style</div><div class="sc-card-title">OOTD Reel</div></div>
+    </div>
+
+    <div class="sc-card hidden" data-cat="fashion">
+      <span class="sc-index">02</span>
+      <div class="sc-card-media"><div class="sc-card-media-inner">
+        <video src="https://res.cloudinary.com/dwmuyr8ur/video/upload/ifeoma/fashion-02.mov" muted playsinline preload="metadata" loop></video>
+      </div></div>
+      <div class="sc-card-overlay"><div class="sc-card-tag">Fashion & Style</div><div class="sc-card-title">Style Inspo Edit</div></div>
+    </div>
+
+    <div class="sc-card hidden" data-cat="fashion">
+      <span class="sc-index">03</span>
+      <div class="sc-card-media"><div class="sc-card-media-inner">
+        <video src="https://res.cloudinary.com/dwmuyr8ur/video/upload/ifeoma/fashion-03.mov" muted playsinline preload="metadata" loop></video>
+      </div></div>
+      <div class="sc-card-overlay"><div class="sc-card-tag">Fashion & Style</div><div class="sc-card-title">Fashion Week Looks</div></div>
+    </div>
+
+    <!-- ── BRAND & CORPORATE (4) ── -->
+    <div class="sc-card hidden" data-cat="brand">
+      <span class="sc-index">01</span>
+      <div class="sc-card-media"><div class="sc-card-media-inner">
+        <video src="https://res.cloudinary.com/dwmuyr8ur/video/upload/ifeoma/brand-01.mov" muted playsinline preload="metadata" loop></video>
+      </div></div>
+      <div class="sc-card-overlay"><div class="sc-card-tag">Brand & Corporate</div><div class="sc-card-title">NGO Campaign</div></div>
+    </div>
+
+    <div class="sc-card hidden" data-cat="brand">
+      <span class="sc-index">02</span>
+      <div class="sc-card-media"><div class="sc-card-media-inner">
+        <video src="https://res.cloudinary.com/dwmuyr8ur/video/upload/ifeoma/brand-02.mov" muted playsinline preload="metadata" loop></video>
+      </div></div>
+      <div class="sc-card-overlay"><div class="sc-card-tag">Brand & Corporate</div><div class="sc-card-title">Product Integration</div></div>
+    </div>
+
+    <div class="sc-card hidden" data-cat="brand">
+      <span class="sc-index">03</span>
+      <div class="sc-card-media"><div class="sc-card-media-inner">
+        <video src="https://res.cloudinary.com/dwmuyr8ur/video/upload/ifeoma/brand-03.mp4" muted playsinline preload="metadata" loop></video>
+      </div></div>
+      <div class="sc-card-overlay"><div class="sc-card-tag">Brand & Corporate</div><div class="sc-card-title">Real Estate Video</div></div>
+    </div>
+
+    <div class="sc-card hidden" data-cat="brand">
+      <span class="sc-index">04</span>
+      <div class="sc-card-media"><div class="sc-card-media-inner">
+        <video src="https://res.cloudinary.com/dwmuyr8ur/video/upload/ifeoma/brand-04.mp4" muted playsinline preload="metadata" loop></video>
+      </div></div>
+      <div class="sc-card-overlay"><div class="sc-card-tag">Brand & Corporate</div><div class="sc-card-title">Brand Partnership</div></div>
+    </div>
+
+    <!-- ── BEHIND THE SCENES (3) ── -->
+    <div class="sc-card hidden" data-cat="bts">
+      <span class="sc-index">01</span>
+      <div class="sc-card-media"><div class="sc-card-media-inner">
+        <video src="https://res.cloudinary.com/dwmuyr8ur/video/upload/v1775458658/ifeoma/bts-01.mov" muted playsinline preload="metadata" loop></video>
+      </div></div>
+      <div class="sc-card-overlay"><div class="sc-card-tag">Behind the Scenes</div><div class="sc-card-title">On-Set Moments</div></div>
+    </div>
+
+    <div class="sc-card hidden" data-cat="bts">
+      <span class="sc-index">02</span>
+      <div class="sc-card-media"><div class="sc-card-media-inner">
+        <video src="https://res.cloudinary.com/dwmuyr8ur/video/upload/v1775458692/ifeoma/bts-02.mov" muted playsinline preload="metadata" loop></video>
+      </div></div>
+      <div class="sc-card-overlay"><div class="sc-card-tag">Behind the Scenes</div><div class="sc-card-title">Production Snapshots</div></div>
+    </div>
+
+    <div class="sc-card hidden" data-cat="bts">
+      <span class="sc-index">03</span>
+      <div class="sc-card-media"><div class="sc-card-media-inner">
+        <video src="https://res.cloudinary.com/dwmuyr8ur/video/upload/v1775458801/ifeoma/bts-03.mov" muted playsinline preload="metadata" loop></video>
+      </div></div>
+      <div class="sc-card-overlay"><div class="sc-card-tag">Behind the Scenes</div><div class="sc-card-title">How the Work Gets Made</div></div>
+    </div>
+
+  </div>
+
+  <div class="showcase-footer">
+    <span class="showcase-note">21 videos · 5 categories · Lifestyle 4 · Beauty 7 · Fashion 3 · Brand 4 · BTS 3</span>
+    <a href="https://instagram.com" class="showcase-cta">View More on Instagram →</a>
+  </div>
+
+</section>
+
+<!-- WHO I WORK WITH -->
+<section class="who reveal">
+  <div class="label">Who I Work With</div>
+  <h2 class="who-headline">Made for creators who are <em>serious</em> about their brand.</h2>
+  <p class="who-body">I work best with fashion, beauty and lifestyle personal brands who are already creating — but ready for their content to actually reflect how good they are. You have the vision, the personality, the audience. You just need someone to make the production side effortless.</p>
+  <div class="who-list">
+    <div class="who-item">Fashion creators and independent designers building a personal brand alongside their label</div>
+    <div class="who-item">Makeup artists and beauty creators moving from tutorials to full lifestyle content</div>
+    <div class="who-item">Lifestyle creators who shoot their own footage but struggle with the edit and the strategy</div>
+    <div class="who-item">Personal brands monetising through brand deals who need content that matches their deal value</div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section reveal" id="contact">
+  <div class="cta-bg-text">IFEOMA</div>
+  <div class="cta-inner">
+    <div class="cta-label">Ready When You Are</div>
+    <h2 class="cta-headline">Let's make<br>something <em>remarkable.</em></h2>
+    <p class="cta-body">I take on a limited number of clients each month to make sure every brand I work with gets my full attention. If you're ready to talk, reach out — let's start with a conversation.</p>
+    <div class="cta-buttons">
+      <a href="mailto:hello@ifeoma.com" class="btn-primary">Send Me an Email</a>
+      <a href="https://instagram.com" class="btn-outline">DM on Instagram</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2025 Ifeoma — Content Producer · Nigeria</p>
+  <div class="footer-links">
+    <a href="#">Instagram</a>
+    <a href="#">LinkedIn</a>
+    <a href="#">Twitter</a>
+  </div>
+</footer>
+
+<!-- VIDEO MODAL -->
+<div id="vmodal" class="vmodal" role="dialog" aria-modal="true">
+  <div class="vmodal-backdrop" id="vmodal-backdrop"></div>
+  <div class="vmodal-player">
+    <button class="vmodal-close" id="vmodal-close">
+      <span>Close</span>
+      <span class="vmodal-close-x">×</span>
+    </button>
+    <div class="vmodal-wrap">
+      <video id="vmodal-video" playsinline controls></video>
+      <div class="vmodal-corners"></div>
+    </div>
+    <div class="vmodal-info">
+      <span class="vmodal-tag" id="vmodal-tag"></span>
+      <span class="vmodal-title" id="vmodal-title"></span>
+    </div>
+  </div>
+</div>
+
+<script>
+// Scroll reveal
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if(e.isIntersecting){ e.target.classList.add('visible'); obs.unobserve(e.target); }
+  });
+},{threshold:0.1});
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+// Showcase filter
+const catMeta = {
+  lifestyle: { title: 'Lifestyle & Vlog Production', text: 'Real moments, thoughtfully edited. GRWMs, hotel content, makeup shopping vlogs, voiceover-led storytelling.',  cols: 4 },
+  beauty:    { title: 'Beauty Content',              text: 'Tutorials, routines and transitions edited to do the artistry justice. Makeup tutorials, talking head videos, body glow routines.', cols: 4 },
+  fashion:   { title: 'Fashion & Style',             text: 'Clean edits, good energy. OOTDs, fashion reels, style inspo, outfit content.',                                  cols: 3 },
+  brand:     { title: 'Brand & Corporate',           text: 'Professional content that still has a creative eye. NGO content, agency work, real estate videos, talking head videos.', cols: 4 },
+  bts:       { title: 'Behind The Scenes',           text: 'The process is part of the product. On-set moments, production snapshots, a look at how the work gets made.',   cols: 3 }
+};
+const descTitle = document.getElementById('sc-cat-desc-title');
+const descText  = document.getElementById('sc-cat-desc-text');
+const grid      = document.querySelector('.showcase-grid');
+
+function setGrid(filter) {
+  const cols = catMeta[filter].cols;
+  const isMobile = window.innerWidth <= 768;
+  grid.style.gridTemplateColumns = isMobile ? 'repeat(2,1fr)' : `repeat(${cols},1fr)`;
+}
+
+document.querySelectorAll('.sc-filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.sc-filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const filter = btn.dataset.filter;
+    // pause all playing videos
+    document.querySelectorAll('.sc-card video').forEach(v => { v.pause(); v.currentTime = 0; });
+    document.querySelectorAll('.sc-card').forEach(card => {
+      card.classList.toggle('hidden', card.dataset.cat !== filter);
+    });
+    descTitle.textContent = catMeta[filter].title;
+    descText.textContent  = catMeta[filter].text;
+    setGrid(filter);
+  });
+});
+
+// Set initial grid columns (lifestyle is active by default)
+setGrid('lifestyle');
+
+// Hover play / pause
+document.querySelectorAll('.sc-card').forEach(card => {
+  const video = card.querySelector('video');
+  if (!video) return;
+  card.addEventListener('mouseenter', () => video.play());
+  card.addEventListener('mouseleave', () => { video.pause(); video.currentTime = 0; });
+});
+
+// Mini-player modal
+const vmodal      = document.getElementById('vmodal');
+const vmodalVideo = document.getElementById('vmodal-video');
+const vmodalTag   = document.getElementById('vmodal-tag');
+const vmodalTitle = document.getElementById('vmodal-title');
+
+function openModal(src, tag, title) {
+  vmodalVideo.src = src;
+  vmodalTag.textContent   = tag;
+  vmodalTitle.textContent = title;
+  vmodal.classList.add('open');
+  document.body.style.overflow = 'hidden';
+  vmodalVideo.play().catch(() => {});
+}
+
+function closeModal() {
+  vmodal.classList.remove('open');
+  document.body.style.overflow = '';
+  vmodalVideo.pause();
+  vmodalVideo.src = '';
+}
+
+document.querySelectorAll('.sc-card').forEach(card => {
+  card.addEventListener('click', () => {
+    const video = card.querySelector('video');
+    const tag   = card.querySelector('.sc-card-tag').textContent;
+    const title = card.querySelector('.sc-card-title').textContent;
+    if (video) openModal(video.src, tag, title);
+  });
+});
+
+document.getElementById('vmodal-close').addEventListener('click', closeModal);
+document.getElementById('vmodal-backdrop').addEventListener('click', closeModal);
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+</script>
+</body>
+</html>
